@@ -1,9 +1,9 @@
 ﻿using LLVMSharp.Interop;
 
 // Setup context, etc
-var context = LLVMContextRef.Create();
-var module = context.CreateModuleWithName("main");
-var builder = context.CreateBuilder();
+using var context = LLVMContextRef.Create();
+using var module = context.CreateModuleWithName("main");
+using var builder = context.CreateBuilder();
 
 // Create the puts function
 var putsRetTy = context.Int32Type;
