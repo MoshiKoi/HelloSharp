@@ -1,22 +1,21 @@
-﻿using LLVMSharp;
-using LLVMSharp.Interop;
+﻿using LLVMSharp.Interop;
 
 // Setup context, etc
-var context = new LLVMContext();
-var module = context.Handle.CreateModuleWithName("main");
-var builder = context.Handle.CreateBuilder();
+var context = LLVMContextRef.Create();
+var module = context.CreateModuleWithName("main");
+var builder = context.CreateBuilder();
 
 // Create the puts function
-var putsRetTy = context.Handle.Int32Type;
+var putsRetTy = context.Int32Type;
 var putsParamTys = new LLVMTypeRef[] {
-    LLVMTypeRef.CreatePointer(context.Handle.Int8Type, 0)
+    LLVMTypeRef.CreatePointer(context.Int8Type, 0)
 };
 
 var putsFnTy = LLVMTypeRef.CreateFunction(putsRetTy, putsParamTys);
 var putsFn = module.AddFunction("puts", putsFnTy);
 
 // Create the main function
-var mainRetTy = context.Handle.VoidType;
+var mainRetTy = context.VoidType;
 var mainParamTys = new LLVMTypeRef[] { };
 var mainFnTy = LLVMTypeRef.CreateFunction(mainRetTy, mainParamTys);
 var mainFn = module.AddFunction("main", mainFnTy);
