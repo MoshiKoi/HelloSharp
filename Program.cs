@@ -56,3 +56,11 @@ Console.WriteLine($"Compiled to {outFile}");
 // Can also directly set the module triple
 // module.Target = triple;
 // module.WriteBitcodeToFile("out2.o");
+
+// Run with the Just-In Time engine
+if (args.Contains("jit"))
+{
+    var engine = module.CreateExecutionEngine();
+    var main = module.GetNamedFunction("main");
+    engine.RunFunctionAsMain(main, 0, Array.Empty<string>(), Array.Empty<string>());
+}
