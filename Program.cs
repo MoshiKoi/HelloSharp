@@ -64,3 +64,5 @@ if (args.Contains("jit"))
     var main = module.GetNamedFunction("main");
     engine.RunFunctionAsMain(main, 0, Array.Empty<string>(), Array.Empty<string>());
 }
+
+System.Diagnostics.Process.Start("lld-link", new[] { outFile, "/defaultlib:libcmt" }).Dispose();
