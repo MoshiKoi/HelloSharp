@@ -65,4 +65,7 @@ if (args.Contains("jit"))
     engine.RunFunctionAsMain(main, 0, Array.Empty<string>(), Array.Empty<string>());
 }
 
-System.Diagnostics.Process.Start("lld-link", new[] { outFile, "/defaultlib:libcmt" }).Dispose();
+using var linkProcess = System.Diagnostics.Process.Start("lld-link", new[] { outFile, "/defaultlib:libcmt" });
+
+await linkProcess.WaitForExitAsync();
+Console.WriteLine($"Linked with standard library");
