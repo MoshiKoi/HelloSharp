@@ -30,11 +30,9 @@ builder.BuildRetVoid();
 Console.WriteLine($"LLVM IR\n=========\n{module}");
 
 // Initialize LLVM
-LLVM.InitializeAllTargetInfos();
-LLVM.InitializeAllTargets();
-LLVM.InitializeAllTargetMCs();
-LLVM.InitializeAllAsmParsers();
-LLVM.InitializeAllAsmPrinters();
+LLVM.InitializeNativeTarget();
+LLVM.InitializeNativeAsmParser();
+LLVM.InitializeNativeAsmPrinter();
 
 var triple = LLVMTargetRef.DefaultTriple;
 
